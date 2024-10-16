@@ -33,9 +33,9 @@ export default function AppLayout({ children }) {
                             </div>
                         </div>
                         <div className="flex items-center">
-                            <button className="ml-4 inline-flex items-center rounded-mdborder border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:shadow-outline-gray focus:border-gray-900 focus:outline-none active:bg-gray-900">
+                            <Link href={route('logout')} method="post" className="ml-4 inline-flex items-center rounded-mdborder border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:shadow-outline-gray focus:border-gray-900 focus:outline-none active:bg-gray-900">
                                 Log out
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
