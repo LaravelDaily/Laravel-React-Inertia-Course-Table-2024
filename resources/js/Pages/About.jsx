@@ -1,14 +1,11 @@
-import { Link } from '@inertiajs/react';
+import AppLayout from '../Layouts/AppLayout.jsx';
 
 export default function About() {
     return (
-        <div>
-            <div className="mb-4">
-                <Link className="mr-2" href={route('posts.index')}>Posts</Link>
-                <Link href={route('about')}>About</Link>
+        <AppLayout>
+            <div>
+                About us
             </div>
-
-            About us
-        </div>
+        </AppLayout>
     );
 }
