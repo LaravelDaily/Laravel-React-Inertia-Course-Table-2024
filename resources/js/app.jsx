@@ -1,18 +1,14 @@
 import './bootstrap';
 
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import PostsIndex from './components/Posts/Index.jsx';
+import { createInertiaApp } from '@inertiajs/react'
+import { createRoot } from 'react-dom/client'
 
-const reactComponents = {
-    'posts-index': PostsIndex,
-};
-
-document.querySelectorAll('[data-react-component]').forEach(domElement => {
-    const componentName = domElement.dataset.reactComponent;
-    const Component = reactComponents[componentName];
-    if (Component) {
-        const root = createRoot(domElement);
-        root.render(<Component />); // Make sure JSX is properly parsed here
-    }
-});
+createInertiaApp({
+    resolve: name => {
+        const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
+        return pages[`./Pages/${name}.jsx`]
+    },
+    setup({ el, App, props }) {
+        createRoot(el).render(<App {...props} />)
+    },
+})

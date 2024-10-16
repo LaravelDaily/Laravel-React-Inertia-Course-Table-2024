@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import usePosts from '../../hooks/usePosts.js';
-
-export default function PostsIndex() {
-    const { posts, getPosts } = usePosts();
-
-    useEffect(() => {
-        getPosts();
-    }, []);
+export default function PostsIndex({ posts }) {
+    console.log(posts);
 
     return (
         <table className="min-w-full divide-y divide-gray-200 border">
@@ -35,7 +28,7 @@ export default function PostsIndex() {
                 </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200 divide-solid">
-                {posts && posts.data && posts.data.map((post) => (
+                {posts && posts && posts.map((post) => (
                     <tr key={post.id}>
                         <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                             {post.id}
