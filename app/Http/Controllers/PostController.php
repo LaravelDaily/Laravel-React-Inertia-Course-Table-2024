@@ -12,7 +12,7 @@ class PostController extends Controller
 {
     public function index(): Response
     {
-        $posts = Post::all();
+        $posts = PostResource::collection(Post::all());
 
         return Inertia::render('Posts/Index', compact('posts'));
     }
