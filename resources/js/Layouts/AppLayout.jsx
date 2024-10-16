@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 
 export default function AppLayout({ children }) {
-    const { flash } = usePage().props;
+    const { flash, user } = usePage().props;
 
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -28,8 +27,8 @@ export default function AppLayout({ children }) {
 
                         <div className="flex items-center">
                             <div className="flex flex-col">
-                                <div>Hi, user</div>
-                                <div>email</div>
+                                <div>Hi, {user.name}</div>
+                                <div>{user.email}</div>
                             </div>
                         </div>
                         <div className="flex items-center">
