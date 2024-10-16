@@ -6,6 +6,7 @@ use App\Models\Post;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -14,6 +15,8 @@ class PostController extends Controller
 {
     public function index(): Response
     {
+        Gate::authorize('viewAny', Post::class); // [tl! ++]
+
 //        sleep(3);
 
         $posts = PostResource::collection(Post::all());
@@ -23,11 +26,15 @@ class PostController extends Controller
 
     public function create(): Response
     {
+        Gate::authorize('create', Post::class);
+
         return Inertia::render('Posts/Create');
     }
 
     public function store(StorePostRequest $request): RedirectResponse
     {
+        Gate::authorize('create', Post::class);
+
         // sleep(2);
 
         Post::create($request->validated());
@@ -38,11 +45,15 @@ class PostController extends Controller
 
     public function edit(Post $post): Response
     {
+        Gate::authorize('create', Post::class);
+
         return Inertia::render('Posts/Edit', compact('post'));
     }
 
     public function update(Post $post, StorePostRequest $request): RedirectResponse
     {
+        Gate::authorize('create', Post::class);
+
         $post->update($request->validated());
 
         return redirect()->route('posts.index')
@@ -51,6 +62,8 @@ class PostController extends Controller
 
     public function destroy(Post $post): RedirectResponse
     {
+        Gate::authorize('create', Post::class);
+
         $post->delete();
 
         return redirect()->route('posts.index')

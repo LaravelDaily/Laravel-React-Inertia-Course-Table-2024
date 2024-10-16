@@ -1,7 +1,7 @@
 import AppLayout from '../../Layouts/AppLayout.jsx';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link, router, usePage } from '@inertiajs/react';
 
-export default function PostsIndex({ posts }) {
+export default function PostsIndex({ posts, permissions }) {
     const destroy = (id) => {
         if (confirm('Are you sure?')) {
             router.delete(route('posts.destroy', { id }));
@@ -15,9 +15,11 @@ export default function PostsIndex({ posts }) {
             </Head>
 
             <div>
-                <Link href={route('posts.create')} className="mb-4 inline-block rounded-md bg-blue-500 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
-                    Add new post
-                </Link>
+                { permissions.posts_manage && (
+                    <Link href={route('posts.create')} className="mb-4 inline-block rounded-md bg-blue-500 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+                        Add new post
+                    </Link>
+                )}
 
                 <table className="min-w-full divide-y divide-gray-200 border">
                     <thead>
@@ -54,12 +56,16 @@ export default function PostsIndex({ posts }) {
                                     {post.created_at}
                                 </td>
                                 <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                    <Link href={route('posts.edit', post.id)} className="mr-2 inline-block rounded-md bg-blue-500 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
-                                        Edit
-                                    </Link>
-                                    <button onClick={() => destroy(post.id)} type="button" className="rounded-md bg-red-600 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
-                                        Delete
-                                    </button>
+                                    { permissions.posts_manage && (
+                                        <Link href={route('posts.edit', post.id)} className="mr-2 inline-block rounded-md bg-blue-500 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+                                            Edit
+                                        </Link>
+                                    )}
+                                    { permissions.posts_manage && (
+                                        <button onClick={() => destroy(post.id)} type="button" className="rounded-md bg-red-600 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+                                            Delete
+                                        </button>
+                                    )}
                                 </td>
                             </tr>
                         ))}
