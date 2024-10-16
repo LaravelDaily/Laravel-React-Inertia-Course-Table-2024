@@ -1,8 +1,13 @@
 import AppLayout from '../../Layouts/AppLayout.jsx';
+import { Head } from '@inertiajs/react';
 
 export default function PostsIndex({ posts }) {
     return (
         <AppLayout>
+            <Head>
+                <title>Posts</title>
+            </Head>
+
             <div>
                 <table className="min-w-full divide-y divide-gray-200 border">
                     <thead>
