@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+Route::resource('posts', PostController::class);
 Route::inertia('about', 'About')->name('about');
 Route::inertia('login', 'Auth/Login')->name('login');
 

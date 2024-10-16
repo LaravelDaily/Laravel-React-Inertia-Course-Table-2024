@@ -1,5 +1,5 @@
 import AppLayout from '../../Layouts/AppLayout.jsx';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 export default function PostsIndex({ posts }) {
     return (
@@ -9,6 +9,10 @@ export default function PostsIndex({ posts }) {
             </Head>
 
             <div>
+                <Link href={route('posts.create')} className="mb-4 inline-block rounded-md bg-blue-500 px-4 py-3 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+                    Add new post
+                </Link>
+
                 <table className="min-w-full divide-y divide-gray-200 border">
                     <thead>
                         <tr>
