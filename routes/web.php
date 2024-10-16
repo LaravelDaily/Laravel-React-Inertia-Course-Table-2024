@@ -8,9 +8,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('posts', PostController::class);
-Route::inertia('about', 'About')->name('about');
+Route::middleware('auth')->group(function () {
+    Route::resource('posts', PostController::class);
+    Route::inertia('about', 'About')->name('about');
+});
 Route::inertia('login', 'Auth/Login')->name('login');
+Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'store'])->name('login.post');
 
 /*Route::get('/dashboard', function () {
     return view('dashboard');
