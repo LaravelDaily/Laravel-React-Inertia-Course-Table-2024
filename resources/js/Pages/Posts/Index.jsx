@@ -54,6 +54,9 @@ export default function PostsIndex({ posts }) {
                                     {post.created_at}
                                 </td>
                                 <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                    <Link href={route('posts.edit', post.id)} className="mr-2 inline-block rounded-md bg-blue-500 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+                                        Edit
+                                    </Link>
                                     <button onClick={() => destroy(post.id)} type="button" className="rounded-md bg-red-600 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
                                         Delete
                                     </button>
