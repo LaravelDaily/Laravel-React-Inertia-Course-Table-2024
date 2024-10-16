@@ -1,7 +1,13 @@
 import AppLayout from '../../Layouts/AppLayout.jsx';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 
 export default function PostsIndex({ posts }) {
+    const destroy = (id) => {
+        if (confirm('Are you sure?')) {
+            router.delete(route('posts.destroy', { id }));
+        }
+    }
+
     return (
         <AppLayout>
             <Head>
@@ -17,24 +23,18 @@ export default function PostsIndex({ posts }) {
                     <thead>
                         <tr>
                             <th className="px-6 py-3 bg-gray-50 text-left">
-                                <div className="flex flex-row items-center justify-between cursor-pointer">
-                                    <div className="leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        ID
-                                    </div>
-                                </div>
+                                <span className="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">ID</span>
                             </th>
                             <th className="px-6 py-3 bg-gray-50 text-left">
-                                <div className="flex flex-row items-center justify-between cursor-pointer">
-                                    <div className="leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        Title
-                                    </div>
-                                </div>
+                                <span className="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Title</span>
                             </th>
                             <th className="px-6 py-3 bg-gray-50 text-left">
                                 <span className="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Content</span>
                             </th>
                             <th className="px-6 py-3 bg-gray-50 text-left">
                                 <span className="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Created At</span>
+                            </th>
+                            <th className="px-6 py-3 bg-gray-50 text-left">
                             </th>
                         </tr>
                     </thead>
@@ -52,6 +52,11 @@ export default function PostsIndex({ posts }) {
                                 </td>
                                 <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                                     {post.created_at}
+                                </td>
+                                <td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                    <button onClick={() => destroy(post.id)} type="button" className="rounded-md bg-red-600 px-3 py-2 text-xs font-semibold uppercase tracking-widest text-white shadow-sm">
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))}

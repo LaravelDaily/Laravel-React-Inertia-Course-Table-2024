@@ -35,4 +35,12 @@ class PostController extends Controller
         return redirect()->route('posts.index')
             ->with('message', 'Post created successfully.');
     }
+
+    public function destroy(Post $post): RedirectResponse
+    {
+        $post->delete();
+
+        return redirect()->route('posts.index')
+            ->with('message', 'Post deleted successfully');
+    }
 }
