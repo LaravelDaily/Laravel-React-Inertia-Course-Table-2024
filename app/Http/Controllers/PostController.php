@@ -15,9 +15,7 @@ class PostController extends Controller
 {
     public function index(): Response
     {
-        Gate::authorize('viewAny', Post::class); // [tl! ++]
-
-//        sleep(3);
+        Gate::authorize('viewAny', Post::class);
 
         $posts = PostResource::collection(Post::all());
 
@@ -34,8 +32,6 @@ class PostController extends Controller
     public function store(StorePostRequest $request): RedirectResponse
     {
         Gate::authorize('create', Post::class);
-
-        // sleep(2);
 
         Post::create($request->validated());
 
